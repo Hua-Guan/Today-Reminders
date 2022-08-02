@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        app:titleTextColor="?attr/colorOnPrimary"
+        android:theme="@style/ToolbarCustomStyle"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:title="Add Today Reminders" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginTop="12dp"
+        android:text="Your Today Things:"
+        android:gravity="center_vertical"/>
+
+    <EditText
+        android:id="@+id/today_things"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginTop="24dp"
+        android:text="Reminder Time:"/>
+
+    <TimePicker
+        android:id="@+id/time_picker"
+        android:layout_width="match_parent"
+        android:layout_height="380dp"/>
+
+    <Button
+        android:id="@+id/add_things"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Add"
+        android:textAllCaps="false"/>
+
+</LinearLayout>
