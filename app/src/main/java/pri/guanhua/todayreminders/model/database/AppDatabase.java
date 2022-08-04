@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import pri.guanhua.todayreminders.model.bean.ThingsEntity;
 import pri.guanhua.todayreminders.model.dao.ThingsDao;
 
-@Database(entities = {ThingsEntity.class}, version = 1)
+@Database(entities = {ThingsEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

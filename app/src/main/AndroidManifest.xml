@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="pri.guanhua.todayreminders">
+
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +28,13 @@
             android:launchMode="singleTop">
 
         </activity>
+
+        <receiver android:name=".broadcastreceiver.AlarmReceiver"
+            android:exported="false">
+            <intent-filter android:priority="20">
+                <action android:name="pri.guanhua.todayreminders"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
