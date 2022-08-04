@@ -105,8 +105,8 @@ public class MainActivity extends BaseActivity {
             String CHANNEL_ID = "1";
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.enableVibration(true);//设置可以震动
-            channel.setShowBadge(true);
-            channel.enableLights(true);
+            channel.setShowBadge(true);//设置悬浮式通知
+            //channel.enableLights(true);
             channel.setDescription(description);
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this

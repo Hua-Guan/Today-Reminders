@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 import pri.guanhua.todayreminders.GlobalValues;
@@ -68,8 +69,11 @@ public class AddThingsActivity extends BaseActivity{
                         entity.remThings = mTodayThings.getText().toString();
                         entity.remTime = "" + mTimerPicker.getHour() + mTimerPicker.getMinute();
                         instance.thingsDao().insert(entity);
+                        //从数据库中获取事项的id
+                        List<ThingsEntity> all = instance.thingsDao().getAll();
+                        long id = all.get(all.size() - 1).id;
                         //设定闹钟，时间到了即可发送通知
-                        String num = String.valueOf(entity.id);
+                        String num = String.valueOf(id);
                         setAlarm(Integer.parseInt(num), mTimerPicker.getHour(), mTimerPicker.getMinute(), entity.remThings);
                         finish();
                     }
@@ -86,14 +90,15 @@ public class AddThingsActivity extends BaseActivity{
         intent.setAction(GlobalValues.TIME_ACTION);
         intent.putExtra("content", things);
         intent.setComponent(name);
-        PendingIntent sender = PendingIntent.getBroadcast(AddThingsActivity.this, id, intent, PendingIntent.FLAG_CANCEL_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        PendingIntent sender = PendingIntent.getBroadcast(AddThingsActivity.this, id, intent, PendingIntent.FLAG_MUTABLE);
 
         Calendar calen = Calendar.getInstance();
         calen.setTimeInMillis(System.currentTimeMillis());
         calen.set(Calendar.HOUR_OF_DAY, hour);
         calen.set(Calendar.MINUTE, min);
-        alarm.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() +
-                5 * 1000, sender);
+        calen.set(Calendar.SECOND, 0);
+        //开启高精度闹钟，在手机休眠仍然起作用
+        alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calen.getTimeInMillis(), sender);
     }
 
     @Override

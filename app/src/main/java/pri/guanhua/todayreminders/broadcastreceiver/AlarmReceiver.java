@@ -27,15 +27,15 @@ public class AlarmReceiver extends BroadcastReceiver {
                     .setSmallIcon(R.drawable.ic_alarm_on)
                     .setTicker("马云发来一条消息")
                     .setContentTitle("Today Reminders")
-                    .setContentText("开会")
+                    .setContentText(intent.getStringExtra("content"))
                     .setStyle(new NotificationCompat.BigTextStyle()
-                            .bigText("Much longer text that cannot fit one line..."))
+                            .bigText(intent.getStringExtra("content")))
                     .setContentIntent(pendingIntent)
-                    .setWhen( System.currentTimeMillis() )
+                    .setWhen(System.currentTimeMillis())
                     .setDefaults( Notification.DEFAULT_VIBRATE | Notification.DEFAULT_ALL | Notification.DEFAULT_SOUND )
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setCategory(NotificationCompat.CATEGORY_ALARM)
-                    .setOngoing(true)
+                    .setOngoing(true)//若不加这一行，在minui中不会显示通知
                     .setAutoCancel(true);
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
             notificationManager.notify(1, builder.build());
