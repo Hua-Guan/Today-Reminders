@@ -86,11 +86,12 @@ public class AddThingsActivity extends BaseActivity{
     private void setAlarm(int id, int hour, int min, String things){
         AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent();
-        ComponentName name = new ComponentName("pri.guanhua.todayreminders", "pri.guanhua.todayreminders.broadcastreceiver.AlarmReceiver");
+        ComponentName name = new ComponentName(GlobalValues.PACKAGE_NAME, GlobalValues.ALARM_CLASS_PATH);
         intent.setAction(GlobalValues.TIME_ACTION);
         intent.putExtra("content", things);
         intent.setComponent(name);
-        PendingIntent sender = PendingIntent.getBroadcast(AddThingsActivity.this, id, intent, PendingIntent.FLAG_MUTABLE);
+        PendingIntent sender = PendingIntent.getBroadcast(AddThingsActivity.this,
+                id, intent, PendingIntent.FLAG_MUTABLE);
 
         Calendar calen = Calendar.getInstance();
         calen.setTimeInMillis(System.currentTimeMillis());
@@ -99,6 +100,10 @@ public class AddThingsActivity extends BaseActivity{
         calen.set(Calendar.SECOND, 0);
         //开启高精度闹钟，在手机休眠仍然起作用
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calen.getTimeInMillis(), sender);
+        //测试取消闹钟,测试成功
+        PendingIntent test = PendingIntent.getBroadcast(AddThingsActivity.this,
+                id, intent, PendingIntent.FLAG_MUTABLE);
+        //alarm.cancel(test);
     }
 
     @Override
