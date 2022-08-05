@@ -25,7 +25,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "1")
                     .setSmallIcon(R.drawable.ic_alarm_on)
-                    .setTicker("马云发来一条消息")
                     .setContentTitle("Today Reminders")
                     .setContentText(intent.getStringExtra("content"))
                     .setStyle(new NotificationCompat.BigTextStyle()
