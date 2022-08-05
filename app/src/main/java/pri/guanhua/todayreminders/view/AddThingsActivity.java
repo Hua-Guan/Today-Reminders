@@ -1,5 +1,6 @@
 package pri.guanhua.todayreminders.view;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -82,6 +83,7 @@ public class AddThingsActivity extends BaseActivity{
         });
     }
 
+    @SuppressLint("WrongConstant")
     @RequiresApi(api = Build.VERSION_CODES.S)
     private void setAlarm(int id, int hour, int min, String things){
         AlarmManager alarm = (AlarmManager) this.getSystemService(Context.ALARM_SERVICE);
@@ -89,6 +91,9 @@ public class AddThingsActivity extends BaseActivity{
         ComponentName name = new ComponentName(GlobalValues.PACKAGE_NAME, GlobalValues.ALARM_CLASS_PATH);
         intent.setAction(GlobalValues.TIME_ACTION);
         intent.putExtra("content", things);
+        intent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
+        intent.setFlags(0x01000000);//设置可以给后台应用发广播
+        intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);//设置可以给后台应用发广播
         intent.setComponent(name);
         PendingIntent sender = PendingIntent.getBroadcast(AddThingsActivity.this,
                 id, intent, PendingIntent.FLAG_MUTABLE);

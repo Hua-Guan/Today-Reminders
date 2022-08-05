@@ -18,31 +18,35 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:layout_marginTop="12dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
         android:text="Your Today Things:"
         android:gravity="center_vertical"/>
 
     <EditText
         android:id="@+id/today_things"
+        android:hint="Enter here to edit your today things"
         android:layout_width="match_parent"
-        android:layout_height="100dp"/>
+        android:layout_height="80dp"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="28dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="8dp"
         android:text="Reminder Time:"/>
 
     <TimePicker
         android:id="@+id/time_picker"
-        android:layout_width="match_parent"
-        android:layout_height="380dp"/>
+        android:layout_width="300dp"
+        android:layout_gravity="center_horizontal"
+        android:timePickerMode="spinner"
+        android:layout_height="218dp"/>
 
     <Button
         android:id="@+id/add_things"
-        android:layout_width="match_parent"
+        android:layout_width="240dp"
         android:layout_height="48dp"
+        android:layout_gravity="center_horizontal"
         android:text="Add"
         android:textAllCaps="false"/>
 

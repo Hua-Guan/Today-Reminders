@@ -15,7 +15,8 @@
         android:theme="@style/Theme.TodayReminders">
         <activity
             android:name=".view.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +31,8 @@
         </activity>
 
         <receiver android:name=".broadcastreceiver.AlarmReceiver"
-            android:exported="false">
+            android:exported="false"
+            android:enabled="true">
             <intent-filter android:priority="20">
                 <action android:name="pri.guanhua.todayreminders"/>
             </intent-filter>
