@@ -69,6 +69,8 @@ public class AddThingsActivity extends BaseActivity{
                         ThingsEntity entity = new ThingsEntity();
                         entity.remThings = mTodayThings.getText().toString();
                         entity.remTime = "" + mTimerPicker.getHour() + mTimerPicker.getMinute();
+                        entity.remHour = "" + mTimerPicker.getHour();
+                        entity.remMin = "" + mTimerPicker.getMinute();
                         instance.thingsDao().insert(entity);
                         //从数据库中获取事项的id
                         List<ThingsEntity> all = instance.thingsDao().getAll();
@@ -105,10 +107,6 @@ public class AddThingsActivity extends BaseActivity{
         calen.set(Calendar.SECOND, 0);
         //开启高精度闹钟，在手机休眠仍然起作用
         alarm.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calen.getTimeInMillis(), sender);
-        //测试取消闹钟,测试成功
-        PendingIntent test = PendingIntent.getBroadcast(AddThingsActivity.this,
-                id, intent, PendingIntent.FLAG_MUTABLE);
-        //alarm.cancel(test);
     }
 
     @Override

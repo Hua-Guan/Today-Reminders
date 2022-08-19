@@ -82,6 +82,8 @@ public class MainActivity extends BaseActivity {
                     bean.id = entity.id;
                     bean.remThings = entity.remThings;
                     bean.remTime = entity.remTime;
+                    bean.remHour = entity.remHour;
+                    bean.remMin = entity.remMin;
                     list.add(bean);
                 }
                 ListViewAdapter adapter = new ListViewAdapter(list, MainActivity.this, mHandler);

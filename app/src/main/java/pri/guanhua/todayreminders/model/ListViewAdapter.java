@@ -1,5 +1,6 @@
 package pri.guanhua.todayreminders.model;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.ComponentName;
@@ -54,6 +55,7 @@ public class ListViewAdapter extends BaseAdapter {
         return thingsBean.id;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
@@ -62,27 +64,17 @@ public class ListViewAdapter extends BaseAdapter {
             holder.radioButton = convertView.findViewById(R.id.radio_button);
             holder.remTime = convertView.findViewById(R.id.rem_time);
             holder.remThing = convertView.findViewById(R.id.rem_content);
-
-            ThingsBean bean = mList.get(position);
-            holder.radioButton.setTag(bean);
-            holder.radioButton.setChecked(false);
-            holder.remTime.setText(bean.remTime);
-            holder.remThing.setText(bean.remThings);
-
-            setRadioButtonListener(holder);
-
             convertView.setTag(holder);
-
-        }else {
-            Holder holder = (Holder) convertView.getTag();
-            ThingsBean bean = mList.get(position);
-            holder.radioButton.setTag(bean);
-            holder.radioButton.setChecked(false);
-            holder.remTime.setText(bean.remTime);
-            holder.remThing.setText(bean.remThings);
-
-            setRadioButtonListener(holder);
         }
+        Holder holder = (Holder) convertView.getTag();
+        ThingsBean bean = mList.get(position);
+        holder.radioButton.setTag(bean);
+        holder.radioButton.setChecked(false);
+        holder.remTime.setText(bean.remHour + ":" + bean.remMin);
+        holder.remThing.setText(bean.remThings);
+
+        //设置radio的点击取消事件
+        setRadioButtonListener(holder);
         return convertView;
     }
 

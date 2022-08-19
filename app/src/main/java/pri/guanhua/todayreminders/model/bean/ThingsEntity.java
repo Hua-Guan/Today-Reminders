@@ -16,4 +16,10 @@ public class ThingsEntity {
     @ColumnInfo
     public String remThings = "";
 
+    @ColumnInfo
+    public String remHour = "";
+
+    @ColumnInfo
+    public String remMin = "";
+
 }
