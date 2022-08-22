@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,18 +21,16 @@ import java.util.List;
 
 import pri.guanhua.todayreminders.GlobalValues;
 import pri.guanhua.todayreminders.R;
-import pri.guanhua.todayreminders.model.bean.ThingsBean;
 import pri.guanhua.todayreminders.model.bean.ThingsEntity;
 import pri.guanhua.todayreminders.model.database.AppDatabase;
-import pri.guanhua.todayreminders.view.AddThingsActivity;
 
 public class ListViewAdapter extends BaseAdapter {
 
-    private List<ThingsBean> mList = null;
+    private List<ThingsEntity> mList = null;
     private Context mContext = null;
     private Handler mHandler;
 
-    public ListViewAdapter(List<ThingsBean> mList, Context mContext, Handler mHandler) {
+    public ListViewAdapter(List<ThingsEntity> mList, Context mContext, Handler mHandler) {
         this.mList = mList;
         this.mContext = mContext;
         this.mHandler = mHandler;
@@ -51,7 +48,7 @@ public class ListViewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        ThingsBean thingsBean = mList.get(position);
+        ThingsEntity thingsBean = mList.get(position);
         return thingsBean.id;
     }
 
@@ -67,10 +64,10 @@ public class ListViewAdapter extends BaseAdapter {
             convertView.setTag(holder);
         }
         Holder holder = (Holder) convertView.getTag();
-        ThingsBean bean = mList.get(position);
+        ThingsEntity bean = mList.get(position);
         holder.radioButton.setTag(bean);
         holder.radioButton.setChecked(false);
-        holder.remTime.setText(bean.remHour + ":" + bean.remMin);
+        holder.remTime.setText(bean.hour + ":" + bean.min);
         holder.remThing.setText(bean.remThings);
 
         //设置radio的点击取消事件
@@ -87,9 +84,8 @@ public class ListViewAdapter extends BaseAdapter {
                     @Override
                     public void run() {
                         AppDatabase instance = AppDatabase.getInstance(mContext);
-                        ThingsBean thingsBean = (ThingsBean) v.getTag();
-                        long id = thingsBean.id;
-                        instance.thingsDao().deleteById(Integer.parseInt(Long.toString(id)));
+                        ThingsEntity thingsBean = (ThingsEntity) v.getTag();
+                        instance.thingsDao().deleteById(thingsBean.id);
                         mList.remove(thingsBean);
                         //取消闹钟通知
                         Intent intent = new Intent();
@@ -99,12 +95,11 @@ public class ListViewAdapter extends BaseAdapter {
                         intent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
                         intent.setFlags(Intent.FLAG_RECEIVER_FOREGROUND);//设置可以给后台应用发广播
                         intent.setComponent(name);
-                        String strId = String.valueOf(id);
-                        int intId = Integer.parseInt(strId);
                         AlarmManager alarm = (AlarmManager) mContext.getSystemService(Context.ALARM_SERVICE);
                         PendingIntent pendingIntent = PendingIntent.getBroadcast(mContext,
-                                intId, intent, PendingIntent.FLAG_MUTABLE);
+                                thingsBean.id, intent, PendingIntent.FLAG_MUTABLE);
                         alarm.cancel(pendingIntent);
+                        //更新ui
                         mHandler.post(new Runnable() {
                             @Override
                             public void run() {

@@ -1,8 +1,6 @@
 package pri.guanhua.todayreminders.view;
 
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -12,8 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,7 +19,6 @@ import java.util.List;
 
 import pri.guanhua.todayreminders.R;
 import pri.guanhua.todayreminders.model.ListViewAdapter;
-import pri.guanhua.todayreminders.model.bean.ThingsBean;
 import pri.guanhua.todayreminders.model.bean.ThingsEntity;
 import pri.guanhua.todayreminders.model.database.AppDatabase;
 
@@ -76,17 +71,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void run() {
                 List<ThingsEntity> all = AppDatabase.getInstance(MainActivity.this).thingsDao().getAll();
-                List<ThingsBean> list = new ArrayList<>();
-                for (ThingsEntity entity : all){
-                    ThingsBean bean = new ThingsBean();
-                    bean.id = entity.id;
-                    bean.remThings = entity.remThings;
-                    bean.remTime = entity.remTime;
-                    bean.remHour = entity.remHour;
-                    bean.remMin = entity.remMin;
-                    list.add(bean);
-                }
-                ListViewAdapter adapter = new ListViewAdapter(list, MainActivity.this, mHandler);
+                ListViewAdapter adapter = new ListViewAdapter(all, MainActivity.this, mHandler);
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {

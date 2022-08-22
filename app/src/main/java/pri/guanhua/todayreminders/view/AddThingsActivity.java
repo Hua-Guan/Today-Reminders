@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -68,9 +69,15 @@ public class AddThingsActivity extends BaseActivity{
                         AppDatabase instance = AppDatabase.getInstance(AddThingsActivity.this);
                         ThingsEntity entity = new ThingsEntity();
                         entity.remThings = mTodayThings.getText().toString();
-                        entity.remTime = "" + mTimerPicker.getHour() + mTimerPicker.getMinute();
-                        entity.remHour = "" + mTimerPicker.getHour();
-                        entity.remMin = "" + mTimerPicker.getMinute();
+                        entity.hour = mTimerPicker.getHour();
+                        entity.min = mTimerPicker.getMinute();
+                        //记录当前的日期
+                        Calendar c = Calendar.getInstance();
+                        entity.year = c.get(Calendar.YEAR);
+                        entity.month = c.get(Calendar.MONTH);
+                        entity.day = c.get(Calendar.DATE);
+                        entity.currentTimeMillis = System.currentTimeMillis();
+
                         instance.thingsDao().insert(entity);
                         //从数据库中获取事项的id
                         List<ThingsEntity> all = instance.thingsDao().getAll();
