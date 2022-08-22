@@ -77,14 +77,12 @@ public class AddThingsActivity extends BaseActivity{
                         entity.month = c.get(Calendar.MONTH);
                         entity.day = c.get(Calendar.DATE);
                         entity.currentTimeMillis = System.currentTimeMillis();
-
+                        //插入数据
                         instance.thingsDao().insert(entity);
-                        //从数据库中获取事项的id
+                        
                         List<ThingsEntity> all = instance.thingsDao().getAll();
-                        long id = all.get(all.size() - 1).id;
                         //设定闹钟，时间到了即可发送通知
-                        String num = String.valueOf(id);
-                        setAlarm(Integer.parseInt(num), mTimerPicker.getHour(), mTimerPicker.getMinute(), entity.remThings);
+                        setAlarm(all.get(all.size() - 1).id, mTimerPicker.getHour(), mTimerPicker.getMinute(), entity.remThings);
                         finish();
                     }
                 }).start();
