@@ -15,6 +15,7 @@ import android.widget.ListView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pri.guanhua.todayreminders.R;
@@ -71,6 +72,8 @@ public class MainActivity extends BaseActivity {
             @Override
             public void run() {
                 List<ThingsEntity> all = AppDatabase.getInstance(MainActivity.this).thingsDao().getAll();
+                //重新排序
+                Collections.sort(all);
                 ListViewAdapter adapter = new ListViewAdapter(all, MainActivity.this, mHandler);
                 mHandler.post(new Runnable() {
                     @Override

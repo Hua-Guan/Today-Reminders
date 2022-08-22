@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey;
 import java.util.Date;
 
 @Entity
-public class ThingsEntity {
+public class ThingsEntity implements Comparable<ThingsEntity>{
 
     @PrimaryKey(autoGenerate = true)
     public int id;
@@ -33,4 +33,23 @@ public class ThingsEntity {
     @ColumnInfo
     public long currentTimeMillis = 0;
 
+    @Override
+    public int compareTo(ThingsEntity o) {
+        if (this.year != o.year){
+            return this.year - o.year;
+        }
+        if (this.month != o.month){
+            return this.month - o.month;
+        }
+        if (this.day != o.day){
+            return this.day - o.day;
+        }
+        if (this.hour != o.hour){
+            return this.hour - o.hour;
+        }
+        if (this.min != o.min){
+            return this.min - o.min;
+        }
+        return 0;
+    }
 }

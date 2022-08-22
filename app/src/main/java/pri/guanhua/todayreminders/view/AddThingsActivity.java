@@ -79,7 +79,7 @@ public class AddThingsActivity extends BaseActivity{
                         entity.currentTimeMillis = System.currentTimeMillis();
                         //插入数据
                         instance.thingsDao().insert(entity);
-                        
+
                         List<ThingsEntity> all = instance.thingsDao().getAll();
                         //设定闹钟，时间到了即可发送通知
                         setAlarm(all.get(all.size() - 1).id, mTimerPicker.getHour(), mTimerPicker.getMinute(), entity.remThings);
