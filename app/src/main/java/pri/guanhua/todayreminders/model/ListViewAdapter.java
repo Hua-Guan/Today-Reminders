@@ -17,6 +17,9 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import pri.guanhua.todayreminders.GlobalValues;
@@ -28,7 +31,7 @@ public class ListViewAdapter extends BaseAdapter {
 
     private List<ThingsEntity> mList = null;
     private Context mContext = null;
-    private Handler mHandler;
+    private final Handler mHandler;
 
     public ListViewAdapter(List<ThingsEntity> mList, Context mContext, Handler mHandler) {
         this.mList = mList;
@@ -52,7 +55,8 @@ public class ListViewAdapter extends BaseAdapter {
         return thingsBean.id;
     }
 
-    @SuppressLint("SetTextI18n")
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null){
@@ -67,8 +71,33 @@ public class ListViewAdapter extends BaseAdapter {
         ThingsEntity bean = mList.get(position);
         holder.radioButton.setTag(bean);
         holder.radioButton.setChecked(false);
-        holder.remTime.setText(bean.hour + ":" + bean.min);
         holder.remThing.setText(bean.remThings);
+
+        //判断事项时间是否已经过去
+        //如果已经过去，则把事项和时间的字体颜色变成红色
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MINUTE, bean.min);
+        cal.set(Calendar.YEAR, bean.year);
+        cal.set(Calendar.MONTH, bean.month);
+        cal.set(Calendar.DATE, bean.day);
+        cal.set(Calendar.HOUR_OF_DAY, bean.hour);
+        Date remDate = new Date(cal.getTimeInMillis());
+        Date currentDate = new Date();
+        if (remDate.before(currentDate) || remDate.equals(currentDate)){
+            //使用完全时间
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm");
+            holder.remTime.setText(ft.format(remDate));
+            holder.remThing.setTextColor(mContext.getColor(R.color.red));
+            holder.remTime.setTextColor(mContext.getColor(R.color.red));
+        }else {
+            //如果事项还未过去，则使用小时分钟时间
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat ft = new SimpleDateFormat ("hh:mm");
+            Calendar hCal = Calendar.getInstance();
+            hCal.set(Calendar.HOUR_OF_DAY, bean.hour);
+            hCal.set(Calendar.MINUTE, bean.min);
+            Date hDate = new Date(hCal.getTimeInMillis());
+            holder.remTime.setText(ft.format(hDate));
+        }
 
         //设置radio的点击取消事件
         setRadioButtonListener(holder);

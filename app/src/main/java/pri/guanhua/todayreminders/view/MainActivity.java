@@ -72,8 +72,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void run() {
                 List<ThingsEntity> all = AppDatabase.getInstance(MainActivity.this).thingsDao().getAll();
-                //重新排序
-                Collections.sort(all);
+                Collections.sort(all);//重新排序
                 ListViewAdapter adapter = new ListViewAdapter(all, MainActivity.this, mHandler);
                 mHandler.post(new Runnable() {
                     @Override
