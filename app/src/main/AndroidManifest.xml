@@ -31,6 +31,12 @@
 
         </activity>
 
+        <activity android:name=".view.QuestionActivity"
+            android:exported="true"
+            android:launchMode="singleTop">
+
+        </activity>
+
         <receiver android:name=".broadcastreceiver.AlarmReceiver"
             android:exported="false"
             android:enabled="true">
