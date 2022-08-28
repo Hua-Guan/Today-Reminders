@@ -85,13 +85,13 @@ public class ListViewAdapter extends BaseAdapter {
         Date currentDate = new Date();
         if (remDate.before(currentDate) || remDate.equals(currentDate)){
             //使用完全时间
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd HH:mm");
             holder.remTime.setText(ft.format(remDate));
             holder.remThing.setTextColor(mContext.getColor(R.color.red));
             holder.remTime.setTextColor(mContext.getColor(R.color.red));
         }else {
             //如果事项还未过去，则使用小时分钟时间
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat ft = new SimpleDateFormat ("hh:mm");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
             Calendar hCal = Calendar.getInstance();
             hCal.set(Calendar.HOUR_OF_DAY, bean.hour);
             hCal.set(Calendar.MINUTE, bean.min);
