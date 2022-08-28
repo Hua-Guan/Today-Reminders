@@ -12,8 +12,6 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         app:titleTextColor="?attr/colorOnPrimary"
-        android:theme="@style/ToolbarCustomStyle"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:title="Add Today Reminders" />
 
     <TextView

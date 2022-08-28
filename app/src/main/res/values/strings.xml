@@ -3,4 +3,5 @@
     <string name="add">Add</string>
     <string name="channel_name">today reminders</string>
     <string name="channel_description">reminders</string>
+    <string name="question">Question</string>
 </resources>

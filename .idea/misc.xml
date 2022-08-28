@@ -5,9 +5,11 @@
       <map>
         <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/drawable/ic_add.xml" value="0.162" />
         <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/drawable/ic_alarm_on.xml" value="0.188" />
+        <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/drawable/icon_question.xml" value="0.1845" />
         <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/layout/activity_add_things.xml" value="0.18857142857142858" />
-        <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/layout/activity_main.xml" value="0.2033514492753623" />
+        <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/layout/item_list_thing.xml" value="0.2033514492753623" />
+        <entry key="..\:/AndroidProject/TodayReminders/app/src/main/res/menu/menu.xml" value="0.2261650277896537" />
       </map>
     </option>
   </component>

@@ -13,9 +13,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        app:titleTextColor="?attr/colorOnPrimary"
-        android:theme="@style/ToolbarCustomStyle"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        app:titleTextColor="?attr/colorOnPrimary" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
