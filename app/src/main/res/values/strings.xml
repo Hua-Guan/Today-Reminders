@@ -5,4 +5,7 @@
     <string name="channel_description">reminders</string>
     <string name="question">Question</string>
     <string name="question_answer0">This may be because your mobile phone does not give this app the permission to suspend notification, or it is caused by the power saving policy of your mobile phone. Please give this app permission to suspend notification and do not limit power saving to solve this problem. These two problems are especially severe on Xiaomi phones.</string>
+    <string name="your_today_things">Your Affairs Of The Day:</string>
+    <string name="edit_your_today_things">Click here to edit your today\'s events</string>
+    <string name="reminder_time">Reminder Time:</string>
 </resources>

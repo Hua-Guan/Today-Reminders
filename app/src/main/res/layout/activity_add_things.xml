@@ -18,20 +18,20 @@
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:layout_marginTop="4dp"
-        android:text="Your Today Things:"
+        android:text="@string/your_today_things"
         android:gravity="center_vertical"/>
 
     <EditText
         android:id="@+id/today_things"
-        android:hint="Enter here to edit your today things"
+        android:hint="@string/edit_your_today_things"
         android:layout_width="match_parent"
-        android:layout_height="80dp"/>
+        android:layout_height="80dp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="24dp"
         android:layout_marginTop="8dp"
-        android:text="Reminder Time:"/>
+        android:text="@string/reminder_time"/>
 
     <TimePicker
         android:id="@+id/time_picker"
